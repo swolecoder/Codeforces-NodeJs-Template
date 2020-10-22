@@ -1,4 +1,4 @@
-//cat q2.text | node q2.js
+//cat q3.text | node q3.js
 'use strict';
 
 process.stdin.resume();
@@ -30,24 +30,28 @@ function main() {
     for (let i = 0; i < x; i++) {
         let y = readline();
         let z = readline().split(" ");
-        console.log(Bookshelf(y,z))
+        console.log(DominantPiranha(y, z))
     }
 }
 
 
-function DominantPiranhaBookshelf(len, data) {
+function DominantPiranha(len, data) {
 
-    let ans = 0;
+    let max = 0;
+    let min = 0;
 
-    let firstIndex = data.indexOf("1");
-    let lastIndex = data.lastIndexOf("1");
+    for (let i = 0; i < data.length; i++) {
 
-    for (let i = firstIndex; i < lastIndex; i++) {
-        if (data[i] == 0) {
-            ans++
+        max = data[i] > data[max] ? i : max;
+        min = data[i] < data[min] ? i : min
+    }
+
+    if (max == min) return -1; // all number are same
+    for (let i = 0; i < data.length; i++) {
+        if (data[i] == data[max] && (data[i - 1] < data[i]) || (data[i + 1] < data[i])) {
+            return i + 1
         }
     }
 
-    return ans;
-
+    return -1;
 }
