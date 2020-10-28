@@ -1,3 +1,4 @@
+//cat q2.text | node q2.js
 'use strict';
 
 process.stdin.resume();
@@ -26,35 +27,20 @@ function readline() {
 
 function main() {
     const x = readline();
-    for(let i =0; i < x ; i++ ){
+    for (let i = 0; i < x; i++) {
         const y = readline();
-        const d = readline().split("").join("");
-      //  console.log(d)
-      let f = d[i] == 0 ? 1: 0
-      //  console.log(Math.min(flipCount(d,"0"), flipCount(d,"1")))
-        console.log(flipCount(d,f))
+        const d = readline().split("");
+        let count1 = 0;
+        let count2=0;
 
+        for(let i=0; i < d.length-1;i++){
+            if(d[i] == 0 && d[i+1] == 0)count1++;
+            if(d[i] == 1 && d[i+1] == 1)count2++;
+        }
+
+        console.log(Math.max(count1,count2))
     }
 
-
-
-  function flip(ch){
-    return (ch == '0') ? '1' : '0';
-  }
-
-
-  function flipCount(str, expected){
-      let count = 0;
-
-      for(let i=0; i < str.length; i++){
-          if(str[i] != expected){
-              count++
-          }
-
-          expected = flip(expected)
-      }
-      return count;
-  }
 
 
 }
